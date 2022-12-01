@@ -16,8 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 import homepage.urls as homepage
+import reservation.urls as reservation
+import order.urls as order
+import managemenu.urls as managemenu
+import schedule.url as schedule
+import manageresorder.urls as manageresorder
+import user.urls as user
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(homepage))
+    path('', include(homepage)),
+    path('', include(reservation)),
+    path('', include(order)),
+    path('', include(managemenu)),
+    path('', include(schedule)),
+    path('', include(manageresorder)),
+    path('', include(user)),
 ]
