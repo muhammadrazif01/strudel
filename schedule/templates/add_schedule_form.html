@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+  <!-- Masukan source yang akan digunakan -->
+
+  <head>
+    <meta charset="utf-8">
+    <title>Add Schedule</title>
+  </head>
+
+  <body>
+    <div class="main">
+      <form action="" method="POST">{% csrf_token %}      
+        <select name ='day'>
+            <option name="day" value="monday">Monday</option>
+            <option name="day" value="tuesday">Tuesday</option>
+            <option name="day" value="wednesday">Wednesday</option>
+            <option name="day" value="thursday">Thursday</option>
+            <option name="day" value="friday">Friday</option>
+            <option name="day" value="saturday">Saturday</option>
+            <option name="day" value="sunday">Sunday</option>
+        </select>
+        <button type="save">Submit</button>
+      </form>
+  </body>
+  
+</html>

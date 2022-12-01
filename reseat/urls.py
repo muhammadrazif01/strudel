@@ -29,7 +29,7 @@ urlpatterns = [
     path('', include(reservation)),
     path('', include(order)),
     path('', include(managemenu)),
-    path('', include(schedule)),
+    path('schedule/', include(schedule)),
     path('', include(manageresorder)),
     path('', include(user)),
 ]
