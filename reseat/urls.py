@@ -19,7 +19,7 @@ import homepage.urls as homepage
 import reservation.urls as reservation
 import order.urls as order
 import managemenu.urls as managemenu
-import schedule.url as schedule
+import schedule.urls as schedule
 import manageresorder.urls as manageresorder
 import user.urls as user
 
