@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import response
 from django.http.response import HttpResponseRedirect
-from .forms import ScheduleForm
+## from .forms import ScheduleForm
 from .models import Schedule
 
 def mainpage(request):
@@ -10,13 +10,13 @@ def mainpage(request):
 
 def add_schedule(request):
     context = {}
-    form = ScheduleForm(request.POST or None)
-    if (request.method == 'POST' and form.is_valid()):
-        cd = form.cleaned_data
-        schedule = Schedule(day=cd['day'])
-        schedule.save() 
-        return HttpResponseRedirect('/manageschedule')
-    context['form'] = form
+    ## form = ScheduleForm(request.POST or None)
+    ## if (request.method == 'POST' and form.is_valid()):
+    ##    cd = form.cleaned_data
+    ##    schedule = Schedule(day=cd['day'])
+    ##    schedule.save() 
+    ##    return HttpResponseRedirect('/manageschedule')
+    ## context['form'] = form
     return render(request, 'add_schedule_form.html', context)
 
 def update_schedule(request):
