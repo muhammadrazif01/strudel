@@ -19,6 +19,14 @@ def add_schedule(request):
     context['form'] = form
     return render(request, 'add_schedule_form.html', context)
 
+def update_schedule(request):
+    response = {}
+    return render(request, 'update_schedule_form.html', response)
+
+def delete_schedule(request):
+    response = {}
+    return render(request, 'delete_schedule_form.html', response)
+
 def add_schedule_monday(request):
     response = {}
     return render(request, 'schedulemonday.html', response)
