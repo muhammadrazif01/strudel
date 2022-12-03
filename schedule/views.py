@@ -1,4 +1,4 @@
-from .models import Schedule
+from .models import Schedule, Timeslot
 from .forms import ScheduleForm, TimeslotForm
 
 from django.shortcuts import render
@@ -44,6 +44,11 @@ def add_timeslot(request):
     return render(request,
                 'add_timeslot_form.html',
                 {'form': form})
+
+def timeslot_list(request):
+    alltimeslots = Timeslot.timeslots.all()
+    response = {'alltimeslots' : alltimeslots}
+    return render(request, 'all_timeslot.html', response)
 
 def update_schedule(request):
     response = {}

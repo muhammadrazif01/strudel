@@ -14,6 +14,9 @@ class Schedule(models.Model):
     day = models.CharField(max_length=20, choices=DAY_CHOICES)
     schedules = models.Manager()
 
+    def __str__(self):
+         return (self.day)
+
 TIME_SLOT_CHOICES = [
     ('1', '12:00 AM - 01:00 AM'),
     ('2', '01:00 AM - 02:00 AM'),
