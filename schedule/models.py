@@ -1,7 +1,4 @@
-from sched import scheduler
-from django import forms
 from django.db import models
-from django.forms import ModelForm
 
 DAY_CHOICES = [
     ('MONDAY', 'Monday'),
@@ -16,9 +13,6 @@ DAY_CHOICES = [
 class Schedule(models.Model):
     day = models.CharField(max_length=20, choices=DAY_CHOICES)
     schedules = models.Manager()
-    
-    def __str__(self):
-        return self.day
 
 TIME_SLOT_CHOICES = [
     ('1', '12:00 AM - 01:00 AM'),
@@ -54,13 +48,3 @@ class Timeslot(models.Model):
     seat_availability = models.IntegerField()
     is_close = models.BooleanField()
     timeslots = models.Manager()
-
-class ScheduleForm(ModelForm):
-    class Meta:
-        model = Schedule
-        fields = ['day']
-
-class TimeslotForm(ModelForm):
-    class Meta:
-        model = Timeslot
-        fields = ['day', 'time_range', 'total_seat', 'seat_availability', 'is_close']

@@ -1,22 +1,49 @@
+from .models import Schedule
+from .forms import ScheduleForm, TimeslotForm
+
 from django.shortcuts import render
 from django.http import response
 from django.http.response import HttpResponseRedirect
-## from .forms import ScheduleForm
-from .models import Schedule, ScheduleForm
 
 def mainpage(request):
     response = {}
     return render(request, 'mainpage.html', response)
 
 def add_schedule(request):
-    context = {}
-    form = ScheduleForm(request.POST or None)
-    if (request.method == 'POST' and form.is_valid()):
-        Schedule(day=request.POST.get('day')).save()
-        form.save() 
-        return HttpResponseRedirect('/manageschedule')
-    context['form'] = form
-    return render(request, 'add_schedule_form.html', context)
+   form = ScheduleForm()
+   return render(request,
+            'add_schedule_form.html',
+            {'form': form})
+
+def add_schedule(request):
+    if request.method == 'POST':
+        form = ScheduleForm(request.POST)
+        if form.is_valid():
+            schedule = form.save()
+            return render(request, 'mainpage.html', {})
+    else:
+        form = ScheduleForm()
+    return render(request,
+                'add_schedule_form.html',
+                {'form': form})
+
+def add_timeslot(request):
+   form = TimeslotForm()
+   return render(request,
+            'add_timeslot_form.html',
+            {'form': form})
+
+def add_timeslot(request):
+    if request.method == 'POST':
+        form = TimeslotForm(request.POST)
+        if form.is_valid():
+            timeslot = form.save()
+            return render(request, 'mainpage.html', {})
+    else:
+        form = TimeslotForm()
+    return render(request,
+                'add_timeslot_form.html',
+                {'form': form})
 
 def update_schedule(request):
     response = {}
