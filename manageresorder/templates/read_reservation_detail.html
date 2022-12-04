@@ -1,0 +1,19 @@
+{% load static %}
+
+{% block content %}
+<div class="container justify-content-center align-items-center">
+    <h1 class="list_title">Reservation Detail {{id}}</h1>
+    <div class="row justify-content-center">
+    {% for row in reservation %}
+        <h2>Customer Name</h2>
+        <p>{{row.customerR.name}}</p> 
+        <h2>Timeslot Chosen</h2>
+        <p>{{row.timeslot}}</p>
+        <h2>Total Seat</h2>
+        <p>{{row.total_seats}}</p>
+        <h2>Status</h2>
+        <p>{{row.status}}</p>
+    {% endfor %}
+    </div>
+</div>
+{% endblock content %}
