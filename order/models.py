@@ -10,7 +10,7 @@ class Order(models.Model):
 
 class FnbChoice(models.Model):
     order = models.ForeignKey('Order', default=None,  on_delete=models.CASCADE, null=True) #ManyToOne relationship with Order, also deletes FnbChoice if referenced Order is deleted
-    fnb = models.ForeignKey('Fnb', on_delete=models.CASCADE)
+    fnb = models.ForeignKey('Fnb', on_delete=models.CASCADE, null=True)
     amount = models.IntegerField()
     fnbchoices = models.Manager()
     def __str__(self):
