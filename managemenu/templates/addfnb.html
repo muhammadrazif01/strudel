@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Form Buat Makanan</title>
+</head>
+<a href="/managemenu">return</a>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <h3>
+            Add Food or Beverage to Menu
+        </h3>
+        <div>
+            <p>{{ msg }}</p>
+        </div>
+        <div>
+            <p>Name for the item: </p>{{ form.name }}
+        </div>
+        <div>
+            <p>Price: </p>{{ form.price }}
+        </div>
+        <div>
+            <p>Description: </p>{{ form.description }}
+        </div>
+        <div>
+            <p>
+                <label for="category">Category:</label> 
+                <select name="category" id="category">
+                    <option value="Food">Food</option>
+                    <option value="Beverage">Beverage</option>
+                </select>
+            </p>
+        </div>
+        <button type="submit" value="Submit">
+            Submit
+        </button>
+    </form>
+</body>
+</html>
