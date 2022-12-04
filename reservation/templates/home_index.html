@@ -1,0 +1,20 @@
+{% load static %}
+
+{% block content %}
+<head>
+  <meta charset="UTF-8">
+    <title>ReSeat | Home
+    </title>
+</head>
+<body>
+  <div class="container justify-content-center align-items-center">
+    <h1 class="list_title">ReSeat</h1>
+    <div style="text-align:center">
+      <a class="btn btn-primary" style="margin:10px;" href="{% url 'reservation:read_restaurant' %}">List Restaurant</a>
+    </div>
+    <div style="text-align:center">
+        <a class="btn btn-primary" style="margin:10px;" href="{% url 'reservation:read_reservation' %}">My Reservation</a>
+    </div>
+</div>
+</body>
+{% endblock content %}

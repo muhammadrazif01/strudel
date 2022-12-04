@@ -1,0 +1,44 @@
+{% load static %}
+
+{% block content %}
+<div class="container justify-content-center align-items-center">
+    <h1 class="list_title">My Reservation</h1>
+    <h2 class="message">{{message}}</h2>
+    <div class="row justify-content-center">
+        <!-- {% if roleAdmin%}
+        <a href="{% url 'produk:createProduk' %}" class="mybutton" role="button" style="margin-bottom: 30px;">Create Item</a>
+        {% endif %}  -->
+        <h4>Restaurant Name</h4>
+        <p>{{reservation.restaurant.name}}</p>
+        <h4>Restaurant Description</h4>
+        <p>{{reservation.restaurant.description}}</p>
+        <h4>Timeslot Chosen</h4>
+        <p>{{reservation.timeslot}}</p>
+        <h4>Total Seat</h4>
+        <p>{{reservation.total_seat}}</p>
+        <h4>Status</h4>
+        <p>{{reservation.status}}</p>
+        <h4>Action</h4>
+        {% if order %}
+            <a href="{% url 'reservation:read_order' reservation.order.id %}" class="mybutton butwhite" role="button">Orders</a>
+        {% endif %}
+        {% if status %}
+            <a onclick="myFunction()", class="mybutton butwhite" role="button">Cancel</a>
+        {% endif %}
+        <a href="{% url 'reservation:read_reservation' %}" class="mybutton butwhite" role="button">Back</a>
+    </div>
+</div>
+
+<script>
+    function myFunction() {
+        let text;
+        if (confirm("Are you sure you want to cancel this reservation?") == true) {
+            text = "You pressed Yes!";
+            location.href="{% url 'reservation:cancel_reservation' reservation.id %}";
+        } else {
+            text = "You pressed No!";
+            location.href="{% url 'reservation:reservation_detail' reservation.id %}";
+        }
+    }
+</script>
+{% endblock content %}
