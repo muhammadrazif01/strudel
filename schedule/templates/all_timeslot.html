@@ -12,13 +12,13 @@
   <body>    
     <div class='container'>
         <div class='content'>
-            {% if alltimeslots %}
+            {% if allschedules %}
                 {% for alltimeslots in alltimeslots %}
                     <p>Day: {{ alltimeslots.day.day }}</p>
                     <p>Time range: {{ alltimeslots.time_range }}</p>
-                    <p>Total seat: {{ allnote.total_seat }}</p>
-                    <p>Seat availability: {{ allnote.seat_availability }}</p>
-                    <p>Is close?: {{ allnote.is_close }}</p>
+                    <p>Total seat: {{ alltimeslots.total_seat }}</p>
+                    <p>Seat availability: {{ alltimeslots.seat_availability }}</p>
+                    <p>Is close?: {{ alltimeslots.is_close }}</p>
                 {% endfor %}
             {% endif %}
         </div>

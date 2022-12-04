@@ -1,6 +1,8 @@
+from sqlite3 import Time
 from .models import Schedule, Timeslot
 from .forms import ScheduleForm, TimeslotForm
 
+from django.template.response import TemplateResponse
 from django.shortcuts import render
 from django.http import response
 from django.http.response import HttpResponseRedirect
@@ -46,8 +48,9 @@ def add_timeslot(request):
                 {'form': form})
 
 def timeslot_list(request):
+    allschedules = Schedule.schedules.all()
     alltimeslots = Timeslot.timeslots.all()
-    response = {'alltimeslots' : alltimeslots}
+    response = {'alltimeslots' : alltimeslots, 'allschedules' : allschedules}
     return render(request, 'all_timeslot.html', response)
 
 def update_schedule(request):
