@@ -10,11 +10,14 @@ class Order(models.Model):
 
 class FnbChoice(models.Model):
     order = models.ForeignKey('Order', default=None,  on_delete=models.CASCADE, null=True) #ManyToOne relationship with Order, also deletes FnbChoice if referenced Order is deleted
-    fnb = models.ForeignKey('Fnb', on_delete=models.CASCADE, null=True)
+    fnb = models.ForeignKey('Fnb', on_delete=models.CASCADE)
     amount = models.IntegerField()
     fnbchoices = models.Manager()
     def __str__(self):
-        return "{:<8}".format(str(self.amount)+" x") + "{:<50}".format(str(self.fnb)) + "Rp.{:>15}".format(self.fnb.get("price") * self.amount)
+        return "{:<8}".format(str(self.amount)+"x") + "{:<20}".format(str(self.fnb)) + "{:>15}".format("Rp." + str(self.fnb.price * self.amount))
+    
+    def total_price(self):
+        return self.fnb.price * self.amount
 
 # move to managemenu app
 class Menu(models.Model):

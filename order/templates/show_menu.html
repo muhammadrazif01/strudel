@@ -71,7 +71,7 @@
                 </tbody>
             </table>
             <button type="button" id="see-summary">
-                Order summary
+                Order
             </button>
         <script>
             $(document).ready(function(){
@@ -113,25 +113,34 @@
                 });
 
                 var summary_button = document.getElementById("see-summary")
-                summary_button.addEventListener('click', showSummary) 
+                summary_button.addEventListener('click', createOrder) 
 
             });
-            function showSummary() {
+            function createOrder() {
                 const selected = document.getElementsByClassName("fnb-choice")
-                var fnb_choices = []
+                var fnb_choices = {}
                 for (var i = 0; i < selected.length; i++) {
                     if(selected[i].value != 0) {
-                        var temp = {}
-                        temp[parseInt(selected[i].name)] = selected[i].value
-                        fnb_choices.push(temp)
+                        fnb_choices[parseInt(selected[i].name)] = selected[i].value
                     }
                 }
-                console.log(fnb_choices)
-                // $.ajax({
-                //     url: "{% url 'order:show_summary' %}",
-                //     method: 'POST',
-                //     body: JSON.stringify(fnb_choices),
-                // });
+                fnb_choices['reservation_id'] = '{{reservation_id}}'
+                $.ajax({
+                    url: "{% url 'order:create_order' %}",
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8", 
+                    data: JSON.stringify(fnb_choices),
+                    success: function(order_id) {
+                        if (order_id != 'None') {
+                            alert('Order created, redirecting to order details')
+                            window.location.href = "/order/detail/" + order_id
+                        }
+                        else {
+                            alert('Order failed, please try again')
+                        }
+
+                    }
+                });
             }
         </script>
     </body>

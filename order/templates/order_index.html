@@ -7,6 +7,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
 <body>
   <h1>My Orders</h1>
@@ -17,21 +18,59 @@
           <th>Order</th>
           <th>Status</th>
           <th></th>
+          <th></th>
       </tr>
       </thead>
       <tbody>
         {% for order in orders %}
         <tr>
-          <td>Order at {{order.restaurant}}</td>
+          <td>Order at {{order.reservation.restaurant}}</td>
           <td>{{order.status}}</td>
           <td>
-            <form action="{% url 'order:detail' %}" method="post">
-              {% csrf_token %}
-                <button name="order_id" value="{{order.id}}">Detail</button>
-            </form>
+            {% if order.status == "Waiting for payment" %}
+              <button onclick="pay(this.value)" value="{{order.id}}">Make payment</button>
+            {% elif order.status == "Waiting for restaurant's confirmation" %}
+              <button onclick="cancel(this.value)" value="{{order.id}}">Cancel order</button>
+            {% elif order.status == "Order confirmed" %}
+              <button onclick="cancel(this.value)" value="{{order.id}}">Request cancel</button>
+            {% endif %}
+          </td>
+          <td>
+              <button class='detail-button' onclick="seedetail(this.value)" value="{{order.id}}">Detail</button> 
           </td>
         </tr>
         {% endfor %}
       </tbody>
   </table>
+  <button id="create-order">Make order</button>
+  <script>
+    function pay(order_id) {
+      window.location.href = "/order/pay/"+ order_id;
+    };
+
+    function seedetail(order_id) {
+      window.location.href = "/order/detail/" + order_id;
+    };
+
+    function cancel(order_id) {
+      if ( confirm("Are you sure you want to cancel this order ?") ) {
+        $.ajax({
+          url: "/order/cancel/" + order_id,
+          type: 'POST',
+          success: function(order_id) {
+              if (order_id != 'None') {
+                  location.reload()
+              }
+              else {
+                  alert('Cancellation failed, please try again')
+              }
+          }
+        });
+      }
+    }
+    
+    document.getElementById('create-order').onclick = function () {
+      window.location.href = '/order/reservations';
+    }
+  </script>
 </body>
