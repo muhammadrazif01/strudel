@@ -1,3 +1,4 @@
+from email.policy import default
 from django import forms
 
 class CreateTimeslotForm(forms.Form):
@@ -29,8 +30,14 @@ class CreateTimeslotForm(forms.Form):
 class UpdateTimeslotForm(forms.Form):
   id = forms.ImageField()
   total_seat = forms.IntegerField()
+  is_close = forms.ChoiceField()
 
   def __init__(self):
       super(UpdateTimeslotForm, self).__init__()
+      OPEN_CHOICES = [
+        ('Yes', 'Yes'),
+        ('No', 'No'),
+      ]
       self.fields['id'] = forms.ChoiceField(label='ID', widget=forms.NumberInput())
       self.fields['total_seat'] = forms.IntegerField(label='Total Seat', widget=forms.NumberInput())
+      self.fields['is_close'] = forms.ChoiceField(choices=OPEN_CHOICES, label='Close incoming reservation?')

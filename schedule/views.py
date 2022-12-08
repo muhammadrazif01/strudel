@@ -52,9 +52,15 @@ def update_timeslot(request):
     if request.method == 'POST':
         id = request.POST['id']
         total_seat = request.POST['total_seat']
-        ts = Timeslot.timeslots.get(id=id)
-        ts.total_seat = total_seat
-        ts.save()
+        is_close = request.POST['is_close']
+        if (is_close == 'Yes'):
+            ts = Timeslot.timeslots.get(id=id)
+            ts.seat_availability = 0
+            ts.save()
+        else:
+            ts = Timeslot.timeslots.get(id=id)
+            ts.total_seat = total_seat
+            ts.save()
         return redirect('/schedule/show-timeslot')
     form = UpdateTimeslotForm()    
     data = {
