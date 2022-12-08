@@ -1,14 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib import messages
 
 from .models import Timeslot
 from .forms import CreateTimeslotForm, UpdateTimeslotForm
-
-def mainpage(request):
-    response = {}
-    return render(request, 'mainpage.html', response)
-
-# what happend if time stop < time start 
 
 def create_timeslot(request):
     if request.method == 'POST':
@@ -68,8 +61,6 @@ def delete_timeslot(request, id):
         return redirect('/schedule/show-timeslot')
     else:
         return redirect('/schedule/warning')
-
-# 2. in closing, what happend if they do not want to fill the total seat fileld
 
 def update_timeslot(request):
     if request.method == 'POST':
