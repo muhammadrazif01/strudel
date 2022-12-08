@@ -5,13 +5,13 @@ import datetime
 # When admin would like to create a timeslot, they need to pick a time-slot in which the choices are already pre-defined
 
 DAY_CHOICES = [
-    ('MONDAY', 'Monday'),
-    ('TUESDAY', 'Tuesday'),
-    ('WEDNESDAY', 'Wednesday'),
-    ('THURSDAY', 'Thursday'),
-    ('FRIDAY', 'Friday'),
-    ('SATURDAY', 'Saturday'),
-    ('SUNDAY', 'Sunday'),
+    ('Monday', 'Monday'),
+    ('Tuesday', 'Tuesday'),
+    ('Wednesday', 'Wednesday'),
+    ('Thursday', 'Thursday'),
+    ('Friday', 'Friday'),
+    ('Saturday', 'Saturday'),
+    ('Sunday', 'Sunday'),
 ]
 
 # Timeslot : day, time start, time stop, total seat, seat availability, dan is close

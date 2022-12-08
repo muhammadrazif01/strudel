@@ -11,13 +11,13 @@ class CreateTimeslotForm(forms.Form):
       super(CreateTimeslotForm, self).__init__()
     
       DAY_CHOICES = [
-        ('MONDAY', 'Monday'),
-        ('TUESDAY', 'Tuesday'),
-        ('WEDNESDAY', 'Wednesday'),
-        ('THURSDAY', 'Thursday'),
-        ('FRIDAY', 'Friday'),
-        ('SATURDAY', 'Saturday'),
-        ('SUNDAY', 'Sunday')
+        ('Monday', 'Monday'),
+        ('Tuesday', 'Tuesday'),
+        ('Wednesday', 'Wednesday'),
+        ('Thursday', 'Thursday'),
+        ('Friday', 'Friday'),
+        ('Saturday', 'Saturday'),
+        ('Sunday', 'Sunday'),
       ]
 
       self.fields['day'] = forms.ChoiceField(choices=DAY_CHOICES, label='Day')
@@ -25,3 +25,11 @@ class CreateTimeslotForm(forms.Form):
       self.fields['time_stop'] = forms.TimeField(label='Time Stop', widget=forms.TimeInput(attrs={'type': 'time'}))
       self.fields['total_seat'] = forms.IntegerField(label='Total Seat', widget=forms.NumberInput())
       self.fields['seat_availability'] = forms.IntegerField(label='Seat Availability', widget=forms.NumberInput())
+
+class UpdateTimeslotForm(forms.Form):
+  total_seat = forms.IntegerField()
+  
+  def __init__(self):
+      super(UpdateTimeslotForm, self).__init__()
+    
+      self.fields['total_seat'] = forms.IntegerField(label='Total Seat', widget=forms.NumberInput())
