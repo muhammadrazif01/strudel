@@ -4,23 +4,29 @@
 <div class="container justify-content-center align-items-center">
     <h1 class="list_title">All Timeslot</h1>
     <div class="row justify-content-center">
+        <a href="update-timeslot">  
+            <button>Update Timeslot</button>  
+        </a>
         <table class="table table-hover table-striped text-center">
             <thead>
                 <tr>
                     <th scope="col">No</th>
+                    <th scope="col">ID</th>
                     <th scope="col">Day</th>
                     <th scope="col">Time Start</th>
                     <th scope="col">Time Stop</th>
                     <th scope="col">Total Seat</th>
                     <th scope="col">Seat Availability</th>
                     <th scope="col">Is Close?</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Action1</th>
+                    <th scope="col">Action2</th>
                 </tr>
             </thead>
             <tbody>
             {%for row in list_timeslot %}
                 <tr class="table-striped">
                 <th scope="row">{{forloop.counter}}</th>
+                <td>{{row.id}}</td>
                 <td>{{row.day}}</td>
                 <td>{{row.time_start}}</td>
                 <td>{{row.time_stop}}</td>
@@ -30,6 +36,11 @@
                 <td>
                     <a href="/schedule/delete-timeslot/{{row.id}}">
                         <button type="submit">Delete</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="/schedule/update-timeslot/{{row.id}}">
+                        <button type="submit">Update</button>
                     </a>
                 </td>
                 </tr>

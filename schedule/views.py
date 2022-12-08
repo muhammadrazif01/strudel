@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from .models import Timeslot
-from .forms import CreateTimeslotForm
+from .forms import CreateTimeslotForm, UpdateTimeslotForm
 
 def mainpage(request):
     response = {}
@@ -47,3 +47,17 @@ def delete_timeslot(request, id):
         return redirect('/schedule/show-timeslot')
     else:
         return redirect('/schedule')
+
+def update_timeslot(request):
+    if request.method == 'POST':
+        id = request.POST['id']
+        total_seat = request.POST['total_seat']
+        ts = Timeslot.timeslots.get(id=id)
+        ts.total_seat = total_seat
+        ts.save()
+        return redirect('/schedule/show-timeslot')
+    form = UpdateTimeslotForm()    
+    data = {
+        'form': form,   
+    }
+    return render(request, "update_timeslot.html", data)

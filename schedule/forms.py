@@ -25,3 +25,12 @@ class CreateTimeslotForm(forms.Form):
       self.fields['time_stop'] = forms.TimeField(label='Time Stop', widget=forms.TimeInput(attrs={'type': 'time'}))
       self.fields['total_seat'] = forms.IntegerField(label='Total Seat', widget=forms.NumberInput())
       self.fields['seat_availability'] = forms.IntegerField(label='Seat Availability', widget=forms.NumberInput())
+
+class UpdateTimeslotForm(forms.Form):
+  id = forms.ImageField()
+  total_seat = forms.IntegerField()
+
+  def __init__(self):
+      super(UpdateTimeslotForm, self).__init__()
+      self.fields['id'] = forms.ChoiceField(label='ID', widget=forms.NumberInput())
+      self.fields['total_seat'] = forms.IntegerField(label='Total Seat', widget=forms.NumberInput())
