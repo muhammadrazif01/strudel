@@ -8,6 +8,8 @@ def mainpage(request):
     response = {}
     return render(request, 'mainpage.html', response)
 
+# what happend if time stop < time start 
+
 def create_timeslot(request):
     if request.method == 'POST':
         day = request.POST['day']
@@ -15,16 +17,18 @@ def create_timeslot(request):
         time_stop = request.POST['time_stop']
         total_seat = request.POST['total_seat']
         seat_availability = request.POST['seat_availability']
-        ts = Timeslot.timeslots.create(
+        if (int(seat_availability) <= int(total_seat)):
+            ts = Timeslot.timeslots.create(
             day=day,
             time_start=time_start,
             time_stop=time_stop,
             total_seat=total_seat,
             seat_availability=seat_availability,
             is_close=False)
-        ts.save()
-        print(ts.id)
-        return redirect('/schedule/show-timeslot')
+            ts.save()
+            return redirect('/schedule/show-timeslot')
+        else:
+            return redirect('/schedule/warning')
     form = CreateTimeslotForm()    
     data = {
         'form': form,   
@@ -46,7 +50,9 @@ def delete_timeslot(request, id):
         query.delete()
         return redirect('/schedule/show-timeslot')
     else:
-        return redirect('/schedule')
+        return redirect('/schedule/warning')
+
+# 2. in closing, what happend if they do not want to fill the total seat fileld
 
 def update_timeslot(request):
     if request.method == 'POST':
@@ -59,6 +65,14 @@ def update_timeslot(request):
             ts.save()
         else:
             ts = Timeslot.timeslots.get(id=id)
+            total_before_update = ts.total_seat
+            availability_before_update = ts.seat_availability
+            gap = total_before_update - availability_before_update
+
+            if (int(total_seat) > total_before_update):
+                ts.seat_availability = int(availability_before_update) + gap
+            else:
+                ts.seat_availability = int(availability_before_update) - gap
             ts.total_seat = total_seat
             ts.save()
         return redirect('/schedule/show-timeslot')
@@ -67,3 +81,7 @@ def update_timeslot(request):
         'form': form,   
     }
     return render(request, "update_timeslot.html", data)
+
+def warning(request):
+    response = {}
+    return render(request, 'warning.html', response)
