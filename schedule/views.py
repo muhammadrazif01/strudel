@@ -24,7 +24,7 @@ def create_timeslot(request):
                     seat_availability=seat_availability,
                 is_close=False)
                 ts.save()
-                return redirect('/schedule/show-timeslot')
+                return redirect('/schedule')
             elif (hour_start == hour_stop and minute_stop > minute_start):
                 ts = Timeslot.timeslots.create(
                     day=day,
@@ -34,7 +34,7 @@ def create_timeslot(request):
                     seat_availability=seat_availability,
                 is_close=False)
                 ts.save()
-                return redirect('/schedule/show-timeslot')
+                return redirect('/schedule')
             else:
                 return redirect('/schedule/warning')
         else:
@@ -58,7 +58,7 @@ def delete_timeslot(request, id):
     seat_availability = query.seat_availability
     if (total_seat == seat_availability):
         query.delete()
-        return redirect('/schedule/show-timeslot')
+        return redirect('/schedule')
     else:
         return redirect('/schedule/warning')
 
@@ -83,7 +83,7 @@ def update_timeslot(request):
                 ts.seat_availability = int(availability_before_update) - gap
             ts.total_seat = total_seat
             ts.save()
-        return redirect('/schedule/show-timeslot')
+        return redirect('/schedule')
     form = UpdateTimeslotForm()    
     data = {
         'form': form,   
