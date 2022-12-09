@@ -21,6 +21,8 @@
                     <th scope="col">Total Seat</th>
                     <th scope="col">Seat Availability</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -36,6 +38,16 @@
                 <td>
                     <a href="/schedule/delete-timeslot/{{row.id}}">
                         <button type="submit">Delete</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="/schedule/reserve-timeslot/{{row.id}}">
+                        <button type="submit">Add a Reservation</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="/schedule/cancel-reservation/{{row.id}}">
+                        <button type="submit">Cancel a Reservation</button>
                     </a>
                 </td>
                 </tr>
