@@ -110,6 +110,10 @@ def cancel_reservation(request, id):
     else:
         return redirect('/schedule/warning')
 
+def start_over(request):
+    Timeslot.timeslots.all().delete()
+    return redirect('/schedule')
+
 def warning(request):
     response = {}
     return render(request, 'warning.html', response)
