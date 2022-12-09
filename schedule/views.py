@@ -73,13 +73,9 @@ def update_timeslot(request):
                 total_before_update = ts.total_seat
                 availability_before_update = ts.seat_availability
                 gap = total_before_update - availability_before_update
-                if (int(total_seat) > total_before_update):
-                    ts.seat_availability = int(availability_before_update) + gap
-                    ts.save()
-                else:
-                    ts.seat_availability = int(availability_before_update) - gap
-                    ts.total_seat = total_seat
-                    ts.save()
+                ts.seat_availability = int(total_seat) - int(gap)
+                ts.total_seat = int(total_seat)
+                ts.save()
             return redirect('/schedule')
         else:
             return redirect('/schedule/warning')
