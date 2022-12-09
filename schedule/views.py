@@ -15,17 +15,7 @@ def create_timeslot(request):
             hour_stop = int((str(time_stop)[0:1]))
             minute_start = int((str(time_start)[3:4]))
             minute_stop = int((str(time_stop)[3:4]))
-            if (hour_start < hour_stop):
-                ts = Timeslot.timeslots.create(
-                    day=day,
-                    time_start=time_start,
-                    time_stop=time_stop,
-                    total_seat=total_seat,
-                    seat_availability=seat_availability,
-                    is_close=False)
-                ts.save()
-                return redirect('/schedule')
-            elif (hour_start == hour_stop and minute_stop > minute_start):
+            if ((hour_start < hour_stop) or (hour_start == hour_stop and minute_stop > minute_start)):
                 ts = Timeslot.timeslots.create(
                     day=day,
                     time_start=time_start,
