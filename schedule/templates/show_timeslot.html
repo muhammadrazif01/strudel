@@ -3,36 +3,38 @@
 
 {% block content %}
 <div class="container justify-content-center align-items-center">
-    <h1 class="list_title">All Timeslot</h1>
+    <h1 style="color:black">
+        <strong>All Timeslot</strong>
+    </h1>
+    <a href="create-timeslot">
+        <button style="margin: 0px; border-radius: 16px; border: none; padding: 5px 10px 5px 10px; background-color: #CE1212; color: white;">Create Timeslot</button>
+    </a>
+    <a href="update-timeslot">
+        <button style="margin: 5px; border-radius: 16px; border: none; padding: 5px 10px 5px 10px; background-color: #CE1212; color: white;">Update Timeslot</button>
+    </a>
+    <a href="start-over">
+        <button style="margin: 5px; border-radius: 16px; border: none; padding: 5px 10px 5px 10px; background-color: #CE1212; color: white;">Start Over the Week!</button>
+    </a>
+    <br>
+    <br>
     <div class="row justify-content-center">
-        <a href="create-timeslot">  
-            Create Timeslot  
-        </a>
-        <a href="update-timeslot">  
-            Update Timeslot  
-        </a>
-        <a href="start-over">  
-            Start Over the Week!  
-        </a>
         <table class="table table-hover table-striped text-center">
             <thead>
                 <tr>
-                    <th scope="col">No</th>
                     <th scope="col">ID</th>
                     <th scope="col">Day</th>
-                    <th scope="col">Time Start</th>
-                    <th scope="col">Time Stop</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">Finish Time</th>
                     <th scope="col">Total Seat</th>
-                    <th scope="col">Seat Availability</th>
+                    <th scope="col">Available Seat</th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th scope="col">Action</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
             {%for row in list_timeslot %}
                 <tr class="table-striped">
-                <th scope="row">{{forloop.counter}}</th>
                 <td>{{row.id}}</td>
                 <td>{{row.day}}</td>
                 <td>{{row.time_start}}</td>
@@ -40,19 +42,13 @@
                 <td>{{row.total_seat}}</td>
                 <td>{{row.seat_availability}}</td>
                 <td>
-                    <a href="/schedule/delete-timeslot/{{row.id}}">
-                        <button type="submit">Delete</button>
-                    </a>
+                    <a href="/schedule/delete-timeslot/{{row.id}}">Delete</a>
                 </td>
                 <td>
-                    <a href="/schedule/reserve-timeslot/{{row.id}}">
-                        <button type="submit">Add a Reservation</button>
-                    </a>
+                    <a href="/schedule/reserve-timeslot/{{row.id}}">Add One</a>
                 </td>
                 <td>
-                    <a href="/schedule/cancel-reservation/{{row.id}}">
-                        <button type="submit">Cancel a Reservation</button>
-                    </a>
+                    <a href="/schedule/cancel-reservation/{{row.id}}">Cancel One</a>
                 </td>
                 </tr>
             {% endfor %}

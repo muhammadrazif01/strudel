@@ -22,10 +22,10 @@ class CreateTimeslotForm(forms.Form):
       ]
 
       self.fields['day'] = forms.ChoiceField(choices=DAY_CHOICES, label='Day')
-      self.fields['time_start'] = forms.TimeField(label='Time Start', widget=forms.TimeInput(attrs={'type': 'time'}))
-      self.fields['time_stop'] = forms.TimeField(label='Time Stop', widget=forms.TimeInput(attrs={'type': 'time'}))
-      self.fields['total_seat'] = forms.IntegerField(label='Total Seat', widget=forms.NumberInput())
-      self.fields['seat_availability'] = forms.IntegerField(label='Seat Availability', widget=forms.NumberInput())
+      self.fields['time_start'] = forms.TimeField(label='Start Time ', widget=forms.TimeInput(attrs={'type': 'time'}))
+      self.fields['time_stop'] = forms.TimeField(label='Finish Time ', widget=forms.TimeInput(attrs={'type': 'time'}))
+      self.fields['total_seat'] = forms.IntegerField(label='Total Seat ', widget=forms.NumberInput())
+      self.fields['seat_availability'] = forms.IntegerField(label='Available Seat ', widget=forms.NumberInput())
 
 class UpdateTimeslotForm(forms.Form):
   id = forms.ImageField()

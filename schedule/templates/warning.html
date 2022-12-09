@@ -1,33 +1,35 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Warning</title>
-    </head>
-    <body>
-        <div>
-            <h1>You can not do that!</h1>  
-            <a href="/schedule">  
-                <button>Back</button>  
-            </a>
-        </div>
-        <br>
-        <p>Here are things you have to know regarding app operation!</p>
-        <ul>
-            <li>
-                1. When creating a timeslot, the 'Time Stop' can't be earlier than the 'Time Start' hence the 'Create' fails!
-            </li>
-            <li>
-                2. When creating a timeslot, the 'Total Seat' and 'Seat Availability' should exist hence you can't input a negative number and the 'Create' fails!
-            </li>
-            <li>
-                3. When creating a timeslot, you can't have more 'Seat Availability' than the 'Total Seat' hence the 'Create' fails!
-            </li>
-            <li>
-                Syahdan Putra Adriatama - 2006486001
-            </li>
-            <li>
-                Tsabita Sarah Indah Anggayasti - 2006485112
-            </li>
-        </ul>
-    </body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container justify-content-center align-items-center">
+    <div>
+        <h2 style="color:black">
+            <strong>
+                Operation Declined!
+            </strong>
+        </h2>  
+        <a href="/schedule">
+            <button style="margin: 3px; border-radius: 16px; border: none; padding: 5px 10px 5px 10px; background-color: #CE1212; color: white;">Back to Previous Page</button>
+        </a>
+    </div>
+    <br>
+    <h6 style="color:black">Here are things <strong style="color:red;">you have to know</strong> regarding ReSeat operation!</h6>
+    <ul>
+        <li>
+            <h6 style="color:black"><strong style="color:#CE1212;">Creating</strong> a new timeslot</h6>
+        </li>
+        <h6 style="color:black">Finish Time can't be earlier than the Start Time</h6>
+        <h6 style="color:black">Total Seat and Available Seat input can't be a negative number</h6>
+        <h6 style="color:black">Value for 'Seat Availability' can't exceed the 'Total Seat'</h6>
+        <li>
+            <h6 style="color:black"><strong style="color:#CE1212;">Updating</strong> a timeslot</h6>
+        </li>
+        <h6 style="color:black">The new 'Total Seat' can't be negative! There should at least be one seat</h6>
+        <li>
+            <h6 style="color:black"><strong style="color:#CE1212;">Deleting</strong> a timeslot</h6>
+        </li>
+        <h6 style="color:black">You can only delete a timeslot if there is none reservation has been made on that timeslot</h6>
+    </ul>
+</div>
+{% endblock content %}
