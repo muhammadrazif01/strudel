@@ -14,12 +14,16 @@ def show_menu(request):
     reservation_id = request.POST['reservation_id']
     reservation = Reservation.reservations.get(id=reservation_id)
     restaurant = Restaurant.restaurants.get(id=reservation.restaurant.id)
-    menu = Menu.menus.get(restaurant=restaurant)
+    try:
+        menu = Menu.menus.get(restaurant=restaurant)
+    except:
+        menu = None
     response = {
         "menu" : menu,
-        "menus": menu.fnb.all(),
         'reservation_id' : reservation_id
     }
+    if menu != None:
+        response['menus'] = menu.fnb.all().order_by('name')
     return render(request, "show_menu.html", response)
 
 def order_detail(request, order_id):
