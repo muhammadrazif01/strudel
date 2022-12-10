@@ -285,15 +285,15 @@
                 {% csrf_token %}
                 <div class="field padding-bottom--24">
                   <label for="name">Name for the item:</label>
-                  <input type="name" name="name" value="{{ fnb.name }}">
+                  <input type="name" name="name" value="{{ fnb.name }}" required>
                 </div>
                 <div class="field padding-bottom--24">
                     <label for="price">Price (Rupiah):</label>
-                    <input type="number" name="price" value="{{ fnb.price }}">
+                    <input type="number" name="price" value="{{ fnb.price }}" required>
                 </div>
                 <div class="field padding-bottom--24">
                     <label for="description">Description:</label>
-                    <input type="text" name="description" value="{{ fnb.description }}">
+                    <input type="text" name="description" value="{{ fnb.description }}" required>
                 </div>
                 <div class="field padding-bottom--24">
                     <p>
