@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container justify-content-center align-items-center">
+    <h2>My Order</h2>
+    <h2 class="message">{{message}}</h2>
+    <div class="row justify-content-center">
+        <!-- {% if roleAdmin%}
+        <a href="{% url 'produk:createProduk' %}" class="mybutton" role="button" style="margin-bottom: 30px;">Create Item</a>
+        {% endif %}  -->
+        {% for row in fnbs %}
+            <p>{{forloop.counter}}. {{row.name}}</p>
+            <p>Price:</p>
+            <p>{{row.price}}</p>
+        {% endfor %}
+        <h4>Status</h4>
+        <p>{{order.status}}</p>
+        {% if status %}
+            <a href="{% url 'reservation:cancel_order' order.id %}" class="mybutton butwhite" role="button">Cancel</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+
+

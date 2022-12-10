@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+  <meta charset="UTF-8">
+    <title>ReSeat | Home
+    </title>
+</head>
+<body>
+<main id="main">
+
+  <!-- ======= Breadcrumbs ======= -->
+  <div class="breadcrumbs">
+    <div class="container">
+
+      <div class="d-flex justify-content-between align-items-center">
+          <img src="{% static 'img/about.jpg' %}" width="635" height="450">
+          <img src="{% static 'img/about-2.jpg' %}" width="635" height="450">
+      </div>
+      &ensp;   
+      <div class="d-flex justify-content-between align-items-center">
+          <img src="{% static 'img/gallery/gallery-1.jpg' %}" width="635" height="450">
+          <img src="{% static 'img/gallery/gallery-2.jpg' %}" width="635" height="450">
+      </div>
+
+    </div>
+  </div><!-- End Breadcrumbs -->
+
+
+</main><!-- End #main -->
+</body>
+
+{% endblock content %}

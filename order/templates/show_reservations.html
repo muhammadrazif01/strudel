@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<h1>Reservation list</h1>
+<br>
+<table class="table table-stripped">
+    <tbody>
+        {% for reservation in reservations %}
+        <tr>
+            <td>{{reservation}}</td>
+            <td>
+                <form action="{% url 'order:show_menu'%}" method="post">
+                {% csrf_token %}
+                    <button name="reservation_id" value="{{reservation.id}}" class="btn btn-primary">Order</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

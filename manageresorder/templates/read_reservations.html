@@ -1,0 +1,93 @@
+{% extends 'baseadmin.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container justify-content-center align-items-center">
+    <div class="row justify-content-center" style="margin: 20px;">
+        <h1>Pending Reservations</h1>
+        <table class="table table-hover table-striped text-center">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in pending_reservations %}
+                <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{row.customerR.name}}</td>
+                <td>
+                    <a href="{% url 'manageresorder:res_detail' row.id %}" class="btn-book-a-table">
+                        <button style="margin: 5px; border-radius: 16px; border: none; padding: 5px 10px 5px 10px; background-color: #CE1212; color: white;">View Details</button>
+                    </a>
+                    <a href="{% url 'manageresorder:accept' row.id %}" class="btn-book-a-table">
+                        <button style="margin: 5px; border-radius: 16px; border: none; padding: 5px 10px 5px 10px; background-color: rgba(1, 1, 1, 0.888); color: white;">Confirm</button>
+                    </a>
+                    <a href="{% url 'manageresorder:reject' row.id%}" class="btn-book-a-table">
+                        <button style="margin: 5px; border-radius: 16px; border: none; padding: 5px 10px 5px 10px; background-color: #CE1212; color: white;">Reject</button>
+                    </a>
+                </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    
+    <div class="row justify-content-center" style="margin: 20px;">
+        <h1>Active Reservations</h1>
+        <table class="table table-hover table-striped text-center">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in active_reservations %}
+                <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{row.customerR.name}}</td>
+                <td>
+                    <a href="{% url 'manageresorder:res_detail' row.id %}" class="btn-book-a-table">
+                        <button style="margin: 5px; border-radius: 16px; border: none; padding: 5px 10px 5px 10px; background-color: #CE1212; color: white;">View Details</button>
+                    </a>
+                </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row justify-content-center" style="margin: 20px;">
+        <h1>Cancelled Reservations</h1>
+        <table class="table table-hover table-striped text-center">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in cancelled_reservations %}
+                <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{row.customerR.name}}</td>
+                <td>
+                    <a href="{% url 'manageresorder:res_detail' row.id %}" class="btn-book-a-table">
+                        <button style="margin: 5px; border-radius: 16px; border: none; padding: 5px 10px 5px 10px; background-color: #CE1212; color: white;">View Details</button>
+                    </a>
+                </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock content %}

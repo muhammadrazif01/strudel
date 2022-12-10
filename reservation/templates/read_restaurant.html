@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container justify-content-center align-items-center">
+    <h1 class="list_title">Restaurant List</h1>
+    <h2 class="message">{{message}}</h2>
+    <div class="row justify-content-center">
+        <!-- {% if roleAdmin%}
+        <a href="{% url 'produk:createProduk' %}" class="mybutton" role="button" style="margin-bottom: 30px;">Create Item</a>
+        {% endif %}  -->
+        <table class="table table-hover table-striped text-center">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Restaurant Name</th>
+                    <th scope="col">Restaurant Description</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in list_restaurant %}
+                <tr class="table-striped">
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{row.name}}</td>
+                <td>{{row.description}}</td>
+                <td>
+                    <a href="{% url 'reservation:restaurant_detail' row.id %}" class="mybutton butwhite" role="button">Detail</a>
+                </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table> 
+    </div>
+</div>
+{% endblock content %}
+
+
