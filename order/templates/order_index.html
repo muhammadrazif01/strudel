@@ -26,6 +26,9 @@
         </td>
       </tr>
       {% endfor %}
+      {% if orders|length == 0 %}
+      <p class="h5">You haven't created any order yet</p>
+      {% endif %}
     </tbody>
 </table>
 <script>

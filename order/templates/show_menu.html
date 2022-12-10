@@ -93,6 +93,10 @@
                 fnb_choices[parseInt(selected[i].name)] = selected[i].value
             }
         }
+        if (Object.keys(fnb_choices).length == 0) {
+            alert('Please pick your food or beverage to create an order')
+            return
+        }
         fnb_choices['reservation_id'] = '{{reservation_id}}'
         $.ajax({
             url: "{% url 'order:create_order' %}",
