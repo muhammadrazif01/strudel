@@ -1,24 +1,25 @@
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
-<div class="container justify-content-center align-items-center">
-    <h1 class="list_title">{{restauran.name}}</h1>
-    <h2 class="message">{{message}}</h2>
-    <div class="row justify-content-center">
-        <!-- {% if roleAdmin%}
-        <a href="{% url 'produk:createProduk' %}" class="mybutton" role="button" style="margin-bottom: 30px;">Create Item</a>
-        {% endif %}  -->
-        <h4>Restaurant Description</h4>
-        <p>{{restaurant.description}}</p>
-        <h4>Timeslot Available</h4>
-        {% for row in schedule %}
-            <p>{{row}}</p>
-        {% endfor %}
-        <h4>Action</h4>
-        <a href="{% url 'reservation:create_reservation' restaurant.id %}" class="mybutton butwhite" role="button">Reserve</a>
-        <a href="{% url 'reservation:read_restaurant' %}" class="mybutton butwhite" role="button">Back</a>
+<body>
+    <div class="container justify-content-center align-items-center">
+        <h3 class="message">{{message}}</h3>
+        <div class="row justify-content-center">
+            <!-- {% if roleAdmin%}
+            <a href="{% url 'produk:createProduk' %}" class="mybutton" role="button" style="margin-bottom: 30px;">Create Item</a>
+            {% endif %}  -->
+            &emsp;
+            <h2>{{restaurant.name}}</h2>
+            <h4>Restaurant Description</h4>
+            <p>{{restaurant.description}}</p>
+            <h4>Timeslot Available</h4>
+            {% for row in schedule %}
+                <p>{{row}}</p>
+            {% endfor %}
+            <a href="{% url 'reservation:create_reservation' restaurant.id %}" class="mybutton butwhite" role="button">Reserve</a>
+        </div>
     </div>
-</div>
+
+</body>
 {% endblock content %}
-
-

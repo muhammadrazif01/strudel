@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
@@ -7,14 +8,27 @@
     </title>
 </head>
 <body>
-  <div class="container justify-content-center align-items-center">
-    <h1 class="list_title">ReSeat</h1>
-    <div style="text-align:center">
-      <a class="btn btn-primary" style="margin:10px;" href="{% url 'reservation:read_restaurant' %}">List Restaurant</a>
+<main id="main">
+
+  <!-- ======= Breadcrumbs ======= -->
+  <div class="breadcrumbs">
+    <div class="container">
+
+      <div class="d-flex justify-content-between align-items-center">
+          <img src="{% static 'img/about.jpg' %}" width="635" height="450">
+          <img src="{% static 'img/about-2.jpg' %}" width="635" height="450">
+      </div>
+      &ensp;   
+      <div class="d-flex justify-content-between align-items-center">
+          <img src="{% static 'img/gallery/gallery-1.jpg' %}" width="635" height="450">
+          <img src="{% static 'img/gallery/gallery-2.jpg' %}" width="635" height="450">
+      </div>
+
     </div>
-    <div style="text-align:center">
-        <a class="btn btn-primary" style="margin:10px;" href="{% url 'reservation:read_reservation' %}">My Reservation</a>
-    </div>
-</div>
+  </div><!-- End Breadcrumbs -->
+
+
+</main><!-- End #main -->
 </body>
+
 {% endblock content %}

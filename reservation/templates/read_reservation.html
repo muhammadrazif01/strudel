@@ -1,16 +1,18 @@
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
+&emsp;
+&emsp;
+&emsp;
+&emsp;
 <div class="container justify-content-center align-items-center">
-    <h1 class="list_title">My Reservation</h1>
-    <h2 class="message">{{message}}</h2>
-    <div style="text-align:center">
-        <a class="btn btn-primary" style="margin:10px;" href="{% url 'reservation:home_index' %}">Back</a>
-    </div>
     <div class="row justify-content-center">
         <!-- {% if roleAdmin%}
         <a href="{% url 'produk:createProduk' %}" class="mybutton" role="button" style="margin-bottom: 30px;">Create Item</a>
         {% endif %}  -->
+        <h1>My Reservation</h1>
+        <h2 class="message">{{message}}</h2>
         <table class="table table-hover table-striped text-center">
             <thead>
                 <tr>

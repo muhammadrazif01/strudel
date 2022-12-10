@@ -48,7 +48,7 @@ def read_reservation(request):
 def reservation_detail(request, id):
     reservation = ReservationModel.reservations.get(id=id)
 
-    if (reservation.status != 'Canceled'):
+    if (reservation.status == 'Pending' or reservation.status == 'Confirmed'):
         status = True
     else:
         status = False
@@ -72,6 +72,9 @@ def cancel_reservation(request, id):
     if (reservation.status == 'Pending'):
         reservation.status = 'Canceled'
         reservation.save()
+    elif (reservation.status == 'Confirmed'):
+        reservation.status = 'Waiting for cancelation confirmation'
+        reservation.save()
 
     return redirect('/my-reservation/')
 
@@ -87,7 +90,7 @@ def read_restaurant(request):
 def restaurant_detail(request, id):
     restaurant = RestaurantModel.restaurants.get(id=id)
 
-    schedule = restaurant.schedule.timeslots.all()
+    schedule = restaurant.schedule.timeslots.filter(is_close=False)
 
     data = {
         'restaurant': restaurant,
