@@ -10,28 +10,15 @@ def create_timeslot(request):
         time_stop = request.POST['time_stop']
         total_seat = request.POST['total_seat']
         seat_availability = request.POST['seat_availability']
-        hour_start = int((str(time_start)[0:1]))
-        hour_stop = int((str(time_stop)[0:1]))
-        minute_start = int((str(time_start)[3:4]))
-        minute_stop = int((str(time_stop)[3:4]))
-        if ((int(seat_availability) >= 0) and (int(total_seat) >= 0)): 
-            if (int(seat_availability) <= int(total_seat)):
-                if ((hour_start < hour_stop) or (hour_start == hour_stop and minute_stop > minute_start)):
-                    ts = Timeslot.timeslots.create(
-                        day=day,
-                        time_start=time_start,
-                        time_stop=time_stop,
-                        total_seat=total_seat,
-                        seat_availability=seat_availability,
-                        is_close=False)
-                    ts.save()
-                    return redirect('/schedule')
-                else:
-                    return redirect('/schedule/warning')
-            else:
-                return redirect('/schedule/warning')
-        else:
-                return redirect('/schedule/warning')
+        ts = Timeslot.timeslots.create(
+            day=day,
+            time_start=time_start,
+            time_stop=time_stop,
+            total_seat=total_seat,
+            seat_availability=seat_availability,
+            is_close=False)
+        ts.save()
+        return redirect('/schedule')
     form = CreateTimeslotForm()    
     data = {
         'form': form,   
