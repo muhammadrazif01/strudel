@@ -80,7 +80,7 @@ def cancel_order(request, order_id):
     if request.method == 'POST':
         try:
             order = Order.orders.get(id=order_id)
-            if order.status == "Waiting for restaurant's confirmation" :
+            if order.status == "Waiting for restaurant's confirmation" or order.status == "Waiting for payment":
                 order.status = "Cancelled"
                 order.save()
             else :
