@@ -61,15 +61,13 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href='#menu'>Manage Menu</a></li>
-          <li><a href="#about">Manage Schedule</a></li>
-          <li><a href="#cacat">Manage Reservation and Order</a></li>
-          <li><a href="#contact">Restaurant Profile</a></li>
+          <li><a href="/home-admin">Home</a></li>
+          <li><a href="/managemenu">Manage Menu</a></li>
+          <li><a href="/schedule">Manage Schedule</a></li>
+          <li><a href="{% url 'manageresorder:index' %}">Manage Reservation and Order</a></li>
         </ul>
       </nav><!-- .navbar -->
-
-      <!-- <a class="btn-book-a-table" href="#book-a-table">Book a Table</a> -->
-      <a class="btn-book-a-table" href="create" >Add item</a>
+      <a class="btn-book-a-table" href="/managemenu/create">Add Item</a>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 

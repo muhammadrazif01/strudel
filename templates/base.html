@@ -61,14 +61,14 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#home">Menu</a></li>
-          <li><a href="#home">Restaurants</a></li>
-          <li><a href="#home">My Reservations</a></li>
+          <li><a href="{% url 'reservation:home_index' %}">Home</a></li>
+          <li><a href="{% url 'reservation:read_restaurant' %}">Restaurants</a></li>
+          <li><a href="{% url 'reservation:read_reservation' %}">My Reservations</a></li>
+          <li><a href="{% url 'order:index' %}">My Order</a></li>
         </ul>
       </nav><!-- .navbar -->
 
-      <a class="btn-book-a-table" href="#home">Book a Table</a>
+      <a class="btn-book-a-table" href="{% url 'reservation:read_restaurant' %}">Book a Table</a>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 

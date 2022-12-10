@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<h1>Restaurant list</h1>
+<br>
+<table class="table table-stripped">
+    <tbody>
+        {% for restaurant in restaurants %}
+        <tr>
+            <td>{{restaurant}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

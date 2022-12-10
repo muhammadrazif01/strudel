@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<h1>My Orders</h1>
+<br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+        <th>Order</th>
+        <th>Status</th>
+        <th><div class="d-flex justify-content-end">
+          <button id="create-order" class="btn btn-primary">Create order</button>  
+        </div></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+      <tr>
+        <td>Order at {{order.reservation.restaurant}}</td>
+        <td>{{order.status}}</td>
+        <td></td>
+        <td>
+            <button class='detail-button btn btn-light' onclick="seedetail(this.value)" value="{{order.id}}">Detail</button> 
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+<script>
+  function pay(order_id) {
+    window.location.href = "/order/pay/"+ order_id;
+  };
+
+  function seedetail(order_id) {
+    window.location.href = "/order/detail/" + order_id;
+  };
+
+  function cancelOrder(order_id) {
+    if ( confirm("Are you sure you want to cancel this order ?") ) {
+      $.ajax({
+        url: "/order/cancel/" + order_id,
+        type: 'POST',
+        success: function(order_id) {
+            if (order_id != 'None') {
+                location.reload()
+            }
+            else {
+                alert('Cancellation failed, please try again')
+            }
+        }
+      });
+    }
+  }
+  
+  document.getElementById('create-order').onclick = function () {
+    window.location.href = '/order/reservations';
+  }
+</script>
+{% endblock content %}

@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<h1>{{menu}}</h1>
+<br>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Makanan/Minuman</th>
+            <th>Harga</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for fnb in menus %}
+        <tr>
+            <td>{{ fnb.name }}</td>
+            <td>{{ fnb.price }}</td>
+            <td>
+                <!-- Change the `data-field` of buttons and `name` of input field's for multiple plus minus buttons-->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <button type="button" class="btn btn-light" data-quantity="minus" data-field="{{fnb.id}}">
+                            <i class="bi bi-dash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <input class="fnb-choice form-control w-25" type="number" name="{{fnb.id}}" value="0" readonly="readonly">
+                    <div clas="input-group-append">
+                        <button type="button" class="btn btn-light" data-quantity="plus" data-field="{{fnb.id}}">
+                            <i class="bi bi-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+        <button type="button" id="see-summary" class="btn btn-primary">
+            Order
+        </button>
+    </div>
+<script>
+    $(document).ready(function(){
+        // This button will increment the value
+        $('[data-quantity="plus"]').click(function(e){
+
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            fieldName = $(this).attr('data-field');
+            // Get its current value
+            var currentVal = parseInt($('input[name='+fieldName+']').val());
+            // If is not undefined
+            if (!isNaN(currentVal)) {
+                // Increment
+                $('input[name='+fieldName+']').val(currentVal + 1);
+            } else {
+                // Otherwise put a 0 there
+                $('input[name='+fieldName+']').val(0);
+            }
+        });
+
+        // This button will decrement the value till 0
+        $('[data-quantity="minus"]').click(function(e) {
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            fieldName = $(this).attr('data-field');
+            // Get its current value
+            var currentVal = parseInt($('input[name='+fieldName+']').val());
+            // If it isn't undefined or its greater than 0
+            if (!isNaN(currentVal) && currentVal > 0) {
+                // Decrement one
+                $('input[name='+fieldName+']').val(currentVal - 1);
+            } else {
+                // Otherwise put a 0 there
+                $('input[name='+fieldName+']').val(0);
+            }
+        });
+
+        var summary_button = document.getElementById("see-summary")
+        summary_button.addEventListener('click', createOrder) 
+
+    });
+    function createOrder() {
+        const selected = document.getElementsByClassName("fnb-choice")
+        var fnb_choices = {}
+        for (var i = 0; i < selected.length; i++) {
+            if(selected[i].value != 0) {
+                fnb_choices[parseInt(selected[i].name)] = selected[i].value
+            }
+        }
+        fnb_choices['reservation_id'] = '{{reservation_id}}'
+        $.ajax({
+            url: "{% url 'order:create_order' %}",
+            type: 'POST',
+            contentType: "application/json; charset=utf-8", 
+            data: JSON.stringify(fnb_choices),
+            success: function(order_id) {
+                if (order_id != 'None') {
+                    alert('Order created, redirecting to order details')
+                    window.location.href = "/order/detail/" + order_id
+                }
+                else {
+                    alert('Order failed, please try again')
+                }
+
+            }
+        });
+    }
+</script>
+{% endblock content %}

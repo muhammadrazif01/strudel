@@ -6,6 +6,9 @@ def index(request):
     fnb = FnB.fnbs.all()
     return render(request, "index.html", {"fnb": fnb})
 
+def home_admin_index(request):
+    return render(request, 'home_admin_index.html')
+
 def create(request):
     if request.method == "POST":
         form = FnBForm(request.POST)
