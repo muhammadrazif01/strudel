@@ -36,7 +36,12 @@
     }
 
     function pay(order_id) {
-        var payment_method = document.getElementsByClassName("picked")[0].value
+        var element = document.getElementsByClassName("picked")
+        if (element.length == 0) {
+            alert('Please pick a payment method')
+            return
+        }
+        var payment_method = element[0].value
         if ( confirm("Are you sure you want to pay with " + payment_method + "?") ) {
             $.ajax({
             url: "{% url 'order:pay_order' order_id %}",
