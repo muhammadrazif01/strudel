@@ -1,0 +1,20 @@
+{% extends 'baseadmin.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container justify-content-center align-items-center">
+    <h1 class="list_title">Reservation <span>Detail</span></h1>
+    <div class="row justify-content-center">
+    {% for row in reservation %}
+        <h4><span>Customer Name</span></h4>
+        <p>{{row.customerR.name}}</p> 
+        <h4>Timeslot Chosen</h4>
+        <p>{{row.timeslot}}</p>
+        <h4>Total Seat</h4>
+        <p>{{row.total_seats}}</p>
+        <h4>Status</h4>
+        <p>{{row.status}}</p>
+    {% endfor %}
+    </div>
+</div>
+{% endblock content %}
