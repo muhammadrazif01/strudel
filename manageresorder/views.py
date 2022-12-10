@@ -7,11 +7,13 @@ def reservation_index(request):
     pending = Reservation.reservations.filter(status='Pending')
     active = Reservation.reservations.filter(status='Active')
     cancelled = Reservation.reservations.filter(status='Canceled')
+    cancelreq = Reservation.reservations.filter(status='Cancel Request')
 
     response = {
         'pending_reservations' : pending,
         'active_reservations' : active,
-        'cancelled_reservations' : cancelled
+        'cancelled_reservations' : cancelled,
+        'cancel_requests' : cancelreq
     }
 
     return render(request, "read_reservations.html", response)
