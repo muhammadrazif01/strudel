@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+    <div class="container justify-content-center align-items-center">
+        <h3 class="message">{{message}}</h3>
+        <div class="row justify-content-center">
+            <!-- {% if roleAdmin%}
+            <a href="{% url 'produk:createProduk' %}" class="mybutton" role="button" style="margin-bottom: 30px;">Create Item</a>
+            {% endif %}  -->
+            &emsp;
+            <h2>{{restaurant.name}}</h2>
+            <h4>Restaurant Description</h4>
+            <p>{{restaurant.description}}</p>
+            <h4>Timeslot Available</h4>
+            {% for row in schedule %}
+                <p>{{row}}</p>
+            {% endfor %}
+            <a href="{% url 'reservation:create_reservation' restaurant.id %}" class="mybutton butwhite" role="button">Reserve</a>
+        </div>
+    </div>
+
+</body>
+{% endblock content %}

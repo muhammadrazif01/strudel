@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+<div class="container justify-content-center align-items-center">
+    <div class="row justify-content-center">
+        <!-- {% if roleAdmin%}
+        <a href="{% url 'produk:createProduk' %}" class="mybutton" role="button" style="margin-bottom: 30px;">Create Item</a>
+        {% endif %}  -->
+        <h1>My Reservation</h1>
+        <h2 class="message">{{message}}</h2>
+        <table class="table table-hover table-striped text-center">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Restaurant Name</th>
+                    <th scope="col">Restaurant Description</th>
+                    <th scope="col">Timeslot Chosen</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {%for row in list_reservation %}
+                <tr class="table-striped">
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{row.restaurant.name}}</td>
+                <td>{{row.restaurant.description}}</td>
+                <td>{{row.timeslot}}</td>
+                <td>{{row.status}}</td>
+                <td>
+                    <a href="{% url 'reservation:reservation_detail' row.id %}" class="mybutton butwhite" role="button">Detail</a>
+                </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table> 
+    </div>
+</div>
+{% endblock content %}
+
+
