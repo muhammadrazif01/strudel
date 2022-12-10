@@ -6,7 +6,7 @@ def reservation_index(request):
     # Need to change it for specified restaurant admins
     pending = Reservation.reservations.filter(status='Pending')
     active = Reservation.reservations.filter(status='Active')
-    cancelled = Reservation.reservations.filter(status='Cancelled')
+    cancelled = Reservation.reservations.filter(status='Canceled')
 
     response = {
         'pending_reservations' : pending,
@@ -36,7 +36,7 @@ def accept_reservation(request, id_res):
 def reject_reservation(request, id_res):
     reservation = Reservation.reservations.get(id=id_res)
 
-    reservation.status = 'Cancelled'
+    reservation.status = 'Canceled'
     reservation.save()
 
     return redirect('manageresorder:index')
