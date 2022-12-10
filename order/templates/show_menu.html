@@ -2,14 +2,17 @@
 {% load static %}
 {% block content %}
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+{% if menu == None %}
+<p class="h5 mx-auto my-auto">Sorry this Restaurant hasn't add their Menu yet</p>
+{% else %}
 <h1>{{menu}}</h1>
 <br>
-    <table class="table table-hover">
+    <table class="table table-hover mx-auto " style="width: 650px;">
         <thead>
         <tr>
-            <th>Makanan/Minuman</th>
+            <th style="width: 350px;">Makanan/Minuman</th>
             <th>Harga</th>
-            <th></th>
+            <th style="width: 170px;"></th>
         </tr>
         </thead>
         <tbody>
@@ -19,7 +22,7 @@
             <td>{{ fnb.price }}</td>
             <td>
                 <!-- Change the `data-field` of buttons and `name` of input field's for multiple plus minus buttons-->
-                <div class="input-group mb-3">
+                <div class="input-group inline-group">
                     <div class="input-group-prepend">
                         <button type="button" class="btn btn-light" data-quantity="minus" data-field="{{fnb.id}}">
                             <i class="bi bi-dash" aria-hidden="true"></i>
@@ -42,6 +45,7 @@
             Order
         </button>
     </div>
+{% endif %}
 <script>
     $(document).ready(function(){
         // This button will increment the value
@@ -92,6 +96,10 @@
             if(selected[i].value != 0) {
                 fnb_choices[parseInt(selected[i].name)] = selected[i].value
             }
+        }
+        if (Object.keys(fnb_choices).length == 0) {
+            alert('Please pick your food or beverage to create an order')
+            return
         }
         fnb_choices['reservation_id'] = '{{reservation_id}}'
         $.ajax({
